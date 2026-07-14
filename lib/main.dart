@@ -1,0 +1,43 @@
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memory_r/presentation/screens/main_screen.dart';
+import 'package:window_manager/window_manager.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  WindowOptions windowOptions = WindowOptions(
+    size: Size(450, 250),
+    center: true,
+    //backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    title: 'Memory R',
+    //titleBarStyle: TitleBarStyle.hidden,
+  );
+
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.setResizable(false);
+    await windowManager.setTitleBarStyle(
+      TitleBarStyle.hidden,
+      windowButtonVisibility: false,
+    );
+    await windowManager.show();
+    await windowManager.focus();
+  });
+  runApp(ProviderScope(child: const MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FluentApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Memory R',
+      theme: FluentThemeData(accentColor: Colors.blue),
+      home: MainScreen(),
+    );
+  }
+}
