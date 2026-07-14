@@ -8,7 +8,7 @@ class WinMemRepositoryImpl implements MemRepository {
   WinMemRepositoryImpl({required this.datasource});
   @override
   Future<MemInfoEntity> getMemInfo() async {
-    final WinMemModel winMemModel = await datasource.fetchMem();
+    final WinMemModel winMemModel = datasource.fetchMem();
     return MemInfoEntity(
       totalMem: winMemModel.ullTotalPhys / (1024 * 1024 * 1024),
       availableMem: winMemModel.ullAvailPhys / (1024 * 1024 * 1024),

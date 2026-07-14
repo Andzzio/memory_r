@@ -5,7 +5,7 @@ import 'package:memory_r/data/models/win_mem_model.dart';
 import 'package:win32/win32.dart';
 
 class WinMemDatasource {
-  Future<WinMemModel> fetchMem() async {
+  WinMemModel fetchMem() {
     final status = calloc<MEMORYSTATUSEX>();
     status.ref.dwLength = sizeOf<MEMORYSTATUSEX>();
     GlobalMemoryStatusEx(status);
