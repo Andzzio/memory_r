@@ -11,6 +11,10 @@ class MemProvider extends StreamNotifier<MemInfoEntity> {
       (_) => getMemInfo.call(),
     ).asyncMap((event) async => await event);
   }
+
+  Future<void> cleanAllMemory() async {
+    await ref.read(cleanAllMemoryUsecaseProvider).call();
+  }
 }
 
 final memProvider = StreamNotifierProvider<MemProvider, MemInfoEntity>(

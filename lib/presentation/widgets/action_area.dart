@@ -1,9 +1,17 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memory_r/presentation/providers/mem_provider.dart';
 import 'package:window_manager/window_manager.dart';
 
-class ActionArea extends StatelessWidget {
+class ActionArea extends ConsumerStatefulWidget {
   const ActionArea({super.key});
 
+  @override
+  ConsumerState<ActionArea> createState() => _ActionAreaState();
+}
+
+class _ActionAreaState extends ConsumerState<ActionArea> {
+  bool isCleanLoading = false;
   @override
   Widget build(BuildContext context) {
     const double spacing = 8;
@@ -17,14 +25,34 @@ class ActionArea extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: FilledButton(
+                  onPressed: isCleanLoading
+                      ? null
+                      : () async {
+                          isCleanLoading = true;
+                          setState(() {});
+                          try {
+                            await ref
+                                .read(memProvider.notifier)
+                                .cleanAllMemory();
+                          } finally {
+                            isCleanLoading = false;
+
+                            setState(() {});
+                          }
+                        },
                   child: Row(
                     spacing: 5,
                     children: [
-                      WindowsIcon(WindowsIcons.broom),
+                      isCleanLoading
+                          ? SizedBox(
+                              width: 14,
+                              height: 14,
+                              child: ProgressRing(strokeWidth: 2),
+                            )
+                          : WindowsIcon(WindowsIcons.broom),
                       Text('Optimize'),
                     ],
                   ),
-                  onPressed: () {},
                 ),
               ),
               Expanded(
