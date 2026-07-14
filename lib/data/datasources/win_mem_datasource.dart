@@ -45,17 +45,26 @@ class WinMemDatasource {
   }
 
   void emptyWorkingSetProcess(int id) {
-    final openResult = OpenProcess(PROCESS_ALL_ACCESS, false, id);
-    if (openResult.value.isNull) {
-      appLogger.w('Error in open Process');
-      throw WindowsException(HRESULT_FROM_WIN32(openResult.error));
+    HANDLE? hProcess;
+    try {
+      final openResult = OpenProcess(
+        PROCESS_SET_QUOTA | PROCESS_QUERY_LIMITED_INFORMATION,
+        false,
+        id,
+      );
+      if (openResult.value.isNull) {
+        appLogger.w('Error in open Process');
+        throw WindowsException(HRESULT_FROM_WIN32(openResult.error));
+      }
+      hProcess = openResult.value;
+      final cleanResult = EmptyWorkingSet(hProcess);
+      if (!cleanResult.value) {
+        appLogger.w('Error in emptyWorkingSet');
+        throw WindowsException(HRESULT_FROM_WIN32(cleanResult.error));
+      }
+      appLogger.d('Empty Working Set finished');
+    } finally {
+      if (hProcess != null && !hProcess.isNull) hProcess.close();
     }
-    final hProcess = openResult.value;
-    final cleanResult = EmptyWorkingSet(hProcess);
-    if (!cleanResult.value) {
-      appLogger.w('Error in emptyWorkingSet');
-      throw WindowsException(HRESULT_FROM_WIN32(cleanResult.error));
-    }
-    appLogger.d('Empty Working Set finished');
   }
 }

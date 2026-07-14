@@ -7,7 +7,13 @@ class CleanAllMemoryUsecase {
   Future<void> call() async {
     final pIds = repo.getAllProcessesId();
     for (int i = 0; i < pIds.length; i++) {
-      repo.cleanMemoryProcess(pIds[i]);
+      try {
+        repo.cleanMemoryProcess(pIds[i]);
+      } catch (e) {
+        appLogger.w(
+          'A error has ocurred in clean Memory: $e with pId: ${pIds[i]}',
+        );
+      }
     }
     appLogger.d('Clean All Memory Succesful');
   }

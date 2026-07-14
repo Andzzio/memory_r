@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memory_r/presentation/providers/mem_info_provider.dart';
+import 'package:memory_r/presentation/providers/mem_provider.dart';
 import 'package:memory_r/presentation/widgets/action_area.dart';
 import 'package:memory_r/presentation/widgets/ram_info_tile.dart';
 import 'package:memory_r/presentation/widgets/info_container.dart';
@@ -13,8 +13,8 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final memInfoState = ref.watch(memInfoProvider);
-    return memInfoState.when(
+    final memState = ref.watch(memProvider);
+    return memState.when(
       data: (memInfo) => NavigationView(
         titleBar: TitleBar(
           icon: WindowsIcon(WindowsIcons.ram),

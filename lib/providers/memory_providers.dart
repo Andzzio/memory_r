@@ -16,3 +16,6 @@ final winMemRepositoryProvider = Provider<MemRepository>(
 final getMemInfoUsecaseProvider = Provider<GetMemInfoUsecase>(
   (ref) => GetMemInfoUsecase(repository: ref.watch(winMemRepositoryProvider)),
 );
+final cleanAllMemoryUsecaseProvider = Provider<GetMemInfoUsecase>(
+  (ref) => GetMemInfoUsecase(repository: ref.watch(winMemRepositoryProvider)),
+);

@@ -14,6 +14,7 @@ void main() async {
     await usecase.call();
   } catch (e) {
     appLogger.w('Error in cleanup: $e');
+    return;
   }
   appLogger.d('Cleanup Finished!!!');
 }
