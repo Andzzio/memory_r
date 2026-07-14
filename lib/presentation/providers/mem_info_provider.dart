@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memory_r/data/repos/win_mem_repository_impl.dart';
 import 'package:memory_r/domain/entities/mem_info_entity.dart';
-import 'package:memory_r/domain/usecases/get_mem_info_usecase.dart';
+import 'package:memory_r/providers/memory_providers.dart';
 
 class MemInfoProvider extends StreamNotifier<MemInfoEntity> {
   @override
@@ -16,8 +15,4 @@ class MemInfoProvider extends StreamNotifier<MemInfoEntity> {
 
 final memInfoProvider = StreamNotifierProvider<MemInfoProvider, MemInfoEntity>(
   MemInfoProvider.new,
-);
-
-final getMemInfoUsecaseProvider = Provider<GetMemInfoUsecase>(
-  (ref) => GetMemInfoUsecase(repository: ref.watch(winMemRepositoryProvider)),
 );

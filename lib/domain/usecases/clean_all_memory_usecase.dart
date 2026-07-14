@@ -9,6 +9,6 @@ class CleanAllMemoryUsecase {
     for (int i = 0; i < pIds.length; i++) {
       repo.cleanMemoryProcess(pIds[i]);
     }
-    appLogger.d('Clean Memory Succesful');
+    appLogger.d('Clean All Memory Succesful');
   }
 }

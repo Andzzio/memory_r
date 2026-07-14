@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memory_r/data/datasources/win_mem_datasource.dart';
 import 'package:memory_r/data/models/win_mem_model.dart';
 import 'package:memory_r/domain/entities/mem_info_entity.dart';
@@ -27,8 +26,3 @@ class WinMemRepositoryImpl implements MemRepository {
     return datasource.emptyWorkingSetProcess(id);
   }
 }
-
-final winMemRepositoryProvider = Provider<MemRepository>(
-  (ref) =>
-      WinMemRepositoryImpl(datasource: ref.watch(winMemDatasourceProvider)),
-);

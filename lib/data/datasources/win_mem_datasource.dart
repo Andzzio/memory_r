@@ -1,5 +1,4 @@
 import 'package:ffi/ffi.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memory_r/core/app_logger.dart';
 import 'dart:ffi';
 import 'package:memory_r/data/models/win_mem_model.dart';
@@ -60,7 +59,3 @@ class WinMemDatasource {
     appLogger.d('Empty Working Set finished');
   }
 }
-
-final winMemDatasourceProvider = Provider<WinMemDatasource>(
-  (ref) => WinMemDatasource(),
-);

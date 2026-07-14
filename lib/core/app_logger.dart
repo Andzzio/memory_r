@@ -1,3 +1,6 @@
 import 'package:logger/logger.dart';
 
-final appLogger = Logger(printer: PrettyPrinter(colors: true));
+final appLogger = Logger(
+  printer: PrettyPrinter(colors: true),
+  filter: ProductionFilter(),
+);
