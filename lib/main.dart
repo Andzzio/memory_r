@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memory_r/presentation/screens/main_screen.dart';
+import 'package:memory_r/config/app_router.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
@@ -33,11 +33,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FluentApp(
+    return FluentApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Memory R',
       theme: FluentThemeData(accentColor: Colors.blue),
-      home: MainScreen(),
+      routerConfig: appRouter,
     );
   }
 }

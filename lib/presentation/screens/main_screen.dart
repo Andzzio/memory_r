@@ -1,12 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memory_r/presentation/providers/mem_provider.dart';
+import 'package:memory_r/presentation/screens/screen_layout.dart';
 import 'package:memory_r/presentation/widgets/action_area.dart';
 import 'package:memory_r/presentation/widgets/ram_info_tile.dart';
 import 'package:memory_r/presentation/widgets/info_container.dart';
-import 'package:memory_r/presentation/widgets/window_buttons.dart';
 import 'package:memory_r/theme/global_theme.dart';
-import 'package:window_manager/window_manager.dart';
 
 class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
@@ -14,16 +13,8 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memState = ref.watch(memProvider);
-    return NavigationView(
-      titleBar: TitleBar(
-        icon: WindowsIcon(WindowsIcons.ram),
-        title: Text('Memory R'),
-        captionControls: WindowButtons(size: 10),
-        onDragStarted: () {
-          windowManager.startDragging();
-        },
-      ),
-      content: memState.when(
+    return ScreenLayout(
+      child: memState.when(
         data: (memInfo) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(

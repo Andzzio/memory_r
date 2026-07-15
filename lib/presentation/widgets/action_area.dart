@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:memory_r/presentation/providers/mem_provider.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -65,7 +66,9 @@ class _ActionAreaState extends ConsumerState<ActionArea> {
                       Text('Options'),
                     ],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push('/settings');
+                  },
                 ),
               ),
             ],
@@ -80,7 +83,9 @@ class _ActionAreaState extends ConsumerState<ActionArea> {
                     spacing: 5,
                     children: [WindowsIcon(WindowsIcons.info), Text('About')],
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push('/about');
+                  },
                 ),
               ),
               Expanded(
