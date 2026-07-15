@@ -14,17 +14,17 @@ class MainScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final memState = ref.watch(memProvider);
-    return memState.when(
-      data: (memInfo) => NavigationView(
-        titleBar: TitleBar(
-          icon: WindowsIcon(WindowsIcons.ram),
-          title: Text('Memory R'),
-          captionControls: WindowButtons(size: 10),
-          onDragStarted: () {
-            windowManager.startDragging();
-          },
-        ),
-        content: Padding(
+    return NavigationView(
+      titleBar: TitleBar(
+        icon: WindowsIcon(WindowsIcons.ram),
+        title: Text('Memory R'),
+        captionControls: WindowButtons(size: 10),
+        onDragStarted: () {
+          windowManager.startDragging();
+        },
+      ),
+      content: memState.when(
+        data: (memInfo) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(
             spacing: 10,
@@ -123,10 +123,17 @@ class MainScreen extends ConsumerWidget {
             ],
           ),
         ),
+        loading: () => Center(
+          child: SizedBox(width: 32, height: 32, child: ProgressRing()),
+        ),
+        error: (Object error, StackTrace stackTrace) => Center(
+          child: SizedBox(
+            width: 32,
+            height: 32,
+            child: WindowsIcon(WindowsIcons.button_x),
+          ),
+        ),
       ),
-      error: (error, stackTrace) => Center(child: Text('Error al cargar')),
-      loading: () =>
-          Center(child: SizedBox(width: 50, height: 50, child: ProgressRing())),
     );
   }
 }
