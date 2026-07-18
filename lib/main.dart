@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:memory_r/config/app_info.dart';
 import 'package:memory_r/config/app_router.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -25,6 +26,7 @@ void main() async {
     await windowManager.show();
     await windowManager.focus();
   });
+  await AppInfo.initialize();
   runApp(ProviderScope(child: const MyApp()));
 }
 

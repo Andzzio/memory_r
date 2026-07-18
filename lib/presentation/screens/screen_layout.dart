@@ -11,7 +11,11 @@ class ScreenLayout extends StatelessWidget {
     return NavigationView(
       titleBar: TitleBar(
         onBackRequested: context.canPop() ? () => context.pop() : null,
-        icon: WindowsIcon(WindowsIcons.ram),
+        icon: SizedBox(
+          width: 16,
+          height: 16,
+          child: Image.asset('assets/images/icons/icono.png'),
+        ),
         title: Text('Memory R'),
         captionControls: WindowButtons(size: 10),
         onDragStarted: () {
