@@ -12,9 +12,9 @@ class MainScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final memState = ref.watch(memProvider);
+    final memAsyncValue = ref.watch(memProvider);
     return ScreenLayout(
-      child: memState.when(
+      child: memAsyncValue.when(
         data: (memInfo) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           child: Row(
