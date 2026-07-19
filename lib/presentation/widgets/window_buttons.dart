@@ -26,7 +26,7 @@ class WindowButtons extends StatelessWidget {
           IconButton(
             icon: WindowsIcon(WindowsIcons.chrome_close, size: size),
             onPressed: () {
-              windowManager.close();
+              windowManager.hide();
             },
           ),
         ],
