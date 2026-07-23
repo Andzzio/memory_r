@@ -2,13 +2,14 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memory_r/domain/entities/mem_info_entity.dart';
 import 'package:memory_r/presentation/providers/settings_provider.dart';
-import 'package:memory_r/presentation/providers/settings_state.dart';
+import 'package:memory_r/domain/entities/app_settings.dart';
 import 'package:memory_r/providers/memory_providers.dart';
 
 class MemProvider extends StreamNotifier<MemInfoEntity> {
   Timer? _cleanTimer;
   @override
   Stream<MemInfoEntity> build() {
+    _setupCleanTimer(ref.read(settingsProvider));
     final getMemInfo = ref.watch(getMemInfoUsecaseProvider);
     ref.listen(settingsProvider, (previous, next) {
       _setupCleanTimer(next);
@@ -24,14 +25,14 @@ class MemProvider extends StreamNotifier<MemInfoEntity> {
     await ref.read(cleanAllMemoryUsecaseProvider).call();
   }
 
-  void _setupCleanTimer(SettingsState settingsState) {
+  void _setupCleanTimer(AppSettings appSettings) {
     _cleanTimer?.cancel();
-    if (settingsState.setLimitAuto) {
-      _cleanTimer = Timer.periodic(Duration(seconds: settingsState.interval), (
+    if (appSettings.setLimitAuto) {
+      _cleanTimer = Timer.periodic(Duration(seconds: appSettings.interval), (
         timer,
       ) async {
         if (state.value?.usedPercentMem != null &&
-            state.value!.usedPercentMem > settingsState.limitPercent) {
+            state.value!.usedPercentMem > appSettings.limitPercent) {
           await cleanAllMemory();
         }
       });

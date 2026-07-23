@@ -1,24 +1,24 @@
-class SettingsState {
+class AppSettings {
   final bool startAutomatically;
   final bool hideWindowAtStart;
   final bool setLimitAuto;
   final int interval;
   final int limitPercent;
-  SettingsState({
-    this.startAutomatically = false,
-    this.hideWindowAtStart = false,
-    this.setLimitAuto = false,
-    this.interval = 5,
-    this.limitPercent = 80,
+  AppSettings({
+    required this.startAutomatically,
+    required this.hideWindowAtStart,
+    required this.setLimitAuto,
+    required this.interval,
+    required this.limitPercent,
   });
-  SettingsState copyWith({
+  AppSettings copyWith({
     bool? startAutomatically,
     bool? hideWindowAtStart,
     bool? setLimitAuto,
     int? interval,
     int? limitPercent,
   }) {
-    return SettingsState(
+    return AppSettings(
       startAutomatically: startAutomatically ?? this.startAutomatically,
       hideWindowAtStart: hideWindowAtStart ?? this.hideWindowAtStart,
       setLimitAuto: setLimitAuto ?? this.setLimitAuto,

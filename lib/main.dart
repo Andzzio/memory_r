@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:memory_r/config/app_info.dart';
 import 'package:memory_r/config/app_router.dart';
 import 'package:memory_r/core/services/tray_service.dart';
+import 'package:memory_r/providers/core/shared_preferences_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
@@ -18,6 +20,8 @@ void main() async {
     //titleBarStyle: TitleBarStyle.hidden,
   );
 
+  final prefs = await SharedPreferences.getInstance();
+
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.setResizable(false);
     await windowManager.setTitleBarStyle(
@@ -30,8 +34,12 @@ void main() async {
   final trayService = TrayService(winManager: windowManager);
   await trayService.initialize();
   await AppInfo.initialize();
-
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(
+    ProviderScope(
+      overrides: [sharedPreferencesProvider.overrideWithValue(prefs)],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
