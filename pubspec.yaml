@@ -1,5 +1,5 @@
 name: memory_r
-description: "A new Flutter project."
+description: "A lightweight, real-time Windows memory monitoring and RAM optimization desktop utility built with Flutter and Fluent UI."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -46,6 +46,9 @@ dependencies:
   url_launcher: ^6.3.2
   tray_manager: ^0.5.3
   shared_preferences: ^2.5.5
+  launch_at_startup: ^0.5.1
+dependency_overrides:
+  win32_registry: ^3.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
