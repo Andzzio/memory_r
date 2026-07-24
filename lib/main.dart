@@ -1,13 +1,9 @@
-import 'dart:io';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:launch_at_startup/launch_at_startup.dart';
 import 'package:memory_r/config/app_info.dart';
 import 'package:memory_r/config/app_router.dart';
 import 'package:memory_r/core/services/tray_service.dart';
 import 'package:memory_r/providers/core/shared_preferences_provider.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -26,13 +22,6 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
   final hideWindowAtStart = prefs.getBool('hide_window_at_start') ?? false;
-  final packageInfo = await PackageInfo.fromPlatform();
-
-  launchAtStartup.setup(
-    appName: packageInfo.appName,
-    appPath: Platform.resolvedExecutable,
-    packageName: 'com.andzzio.memory-r',
-  );
 
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.setResizable(false);
