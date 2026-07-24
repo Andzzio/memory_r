@@ -92,7 +92,7 @@ BEGIN
             VALUE "CompanyName", "com.example" "\0"
             VALUE "FileDescription", "Memory R - Real-time RAM Monitoring & Optimization Utility" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "memory_r" "\0"
+            VALUE "InternalName", "com.andzzio.memory_r" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "memory_r.exe" "\0"
             VALUE "ProductName", "memory_r" "\0"

@@ -18,7 +18,7 @@ class SharedSettingsDatasource {
     final int? limitPercent = prefs.getInt(limitPercentKey);
     return AppSettings(
       startAutomatically: startAutomatically ?? false,
-      hideWindowAtStart: hideWindowAtStart ?? true,
+      hideWindowAtStart: hideWindowAtStart ?? false,
       setLimitAuto: setLimitAuto ?? false,
       interval: interval ?? 15,
       limitPercent: limitPercent ?? 75,
